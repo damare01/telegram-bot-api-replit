@@ -1,0 +1,1 @@
+run = "docker build -t telegram-api . && docker run -p 8081:8081 telegram-api"
