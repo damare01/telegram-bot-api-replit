@@ -1,0 +1,1 @@
+web: telegram-bot-api --api-id=$TELEGRAM_API_ID --api-hash=$TELEGRAM_API_HASH --local --http-port $PORT

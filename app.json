@@ -1,0 +1,17 @@
+{
+  "name": "Telegram Bot API Server",
+  "description": "Custom Telegram Bot API server with no 20MB file size limit",
+  "repository": "https://github.com/damare01/telegram-bot-api-replit",
+  "keywords": ["telegram", "bot", "api", "tdlib"],
+  "stack": "container",
+  "env": {
+    "TELEGRAM_API_ID": {
+      "description": "Your Telegram API ID from https://my.telegram.org/apps",
+      "required": true
+    },
+    "TELEGRAM_API_HASH": {
+      "description": "Your Telegram API Hash from https://my.telegram.org/apps",
+      "required": true
+    }
+  }
+}

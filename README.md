@@ -1,10 +1,10 @@
-# Telegram Bot API Server - Fly.io Edition
+# Telegram Bot API Server - Heroku Edition
 
-One-click deployable Telegram Bot API server that supports file downloads >20MB on Fly.io free tier.
+One-click deployable Telegram Bot API server that supports file downloads >20MB.
 
 ## What is this?
 
-This is a custom Telegram Bot API server that removes the 20MB file download limit of the official Telegram Bot API. Deploy it on Fly.io completely free!
+This is a custom Telegram Bot API server that removes the 20MB file download limit of the official Telegram Bot API. Deploy it on Heroku for free!
 
 ## Setup Instructions
 
@@ -14,152 +14,79 @@ This is a custom Telegram Bot API server that removes the 20MB file download lim
 - Create an app (name it whatever you want)
 - Copy your `api_id` (number) and `api_hash` (long string)
 
-### 2. Install Fly CLI
-Download and install from: https://fly.io/docs/getting-started/installing-flyctl/
+### 2. Deploy on Heroku
+- Click the one-click deploy button below:
 
-**Windows (PowerShell):**
-```powershell
-iex "& { $(irm https://fly.io/install.ps1) }"
-```
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/damare01/telegram-bot-api-replit)
 
-**Mac:**
-```bash
-curl -L https://fly.io/install.sh | sh
-```
+### 3. Fill in the Form
+- **App name:** Choose any name (e.g., `my-telegram-bot-api`)
+- **TELEGRAM_API_ID:** Your api_id from https://my.telegram.org/apps
+- **TELEGRAM_API_HASH:** Your api_hash from https://my.telegram.org/apps
+- Click **Deploy app**
 
-**Linux:**
-```bash
-curl -L https://fly.io/install.sh | sh
-```
+### 4. Wait for Deployment
+- Heroku will build and deploy automatically
+- Takes 2-5 minutes
+- You'll see "Your app was successfully deployed"
 
-### 3. Login to Fly.io
-```bash
-flyctl auth login
-```
-
-This opens a browser to create a free account (no credit card needed)
-
-### 4. Clone This Repo
-```bash
-git clone https://github.com/damare01/telegram-bot-api-replit.git
-cd telegram-bot-api-replit
-```
-
-### 5. Deploy
-```bash
-flyctl launch
-```
-
-When prompted:
-- **App name:** telegram-bot-api (or your choice)
-- **Region:** Choose closest to you (ord = Chicago, lax = Los Angeles, ams = Amsterdam)
-- **Would you like to set build secrets?** → `y` (yes)
-- **Secret name:** `TELEGRAM_API_ID`
-- **Secret value:** (paste your api_id)
-- **Add another secret?** → `y`
-- **Secret name:** `TELEGRAM_API_HASH`
-- **Secret value:** (paste your api_hash)
-- **Would you like to deploy now?** → `y`
-
-### 6. Get Your URL
-After deployment, you'll see:
-```
-Visit your app at https://telegram-bot-api-xxxx.fly.dev
-```
-
-Your server URL is: `https://telegram-bot-api-xxxx.fly.dev`
+### 5. Get Your Server URL
+- Click **View** or go to your Heroku dashboard
+- Your server URL will be: `https://YOUR-APP-NAME.herokuapp.com`
 
 ## Use With Google Apps Script
 
 In your Google Apps Script `TELEGRAM_API` property, set:
 ```
-https://YOUR-APP-NAME.fly.dev
+https://YOUR-APP-NAME.herokuapp.com
 ```
 
-Then run these functions in Apps Script:
-1. `deleteWebhook()` → Click **Run**
-2. `setWebhook()` → Click **Run**
-
-Check logs to confirm webhook is set.
+Then run `setWebhook()` in Apps Script to re-register your webhook.
 
 ## Features
 
 ✅ No 20MB file size limit  
-✅ **Completely FREE** - Fly.io free tier (3 shared-cpu VMs)  
-✅ Supports files up to 2GB+  
+✅ Free Heroku tier available  
+✅ One-click deploy  
 ✅ Works with Telegram Bot API clients  
-✅ Automatic HTTPS/SSL  
-✅ Always-on (no sleep)  
-✅ Global CDN  
+✅ Supports file uploads up to 2GB  
+✅ Automatic HTTPS  
+✅ Easy updates  
 
 ## Official Documentation
 
 - Telegram Bot API: https://core.telegram.org/bots/api
 - TDLib (powers this): https://core.telegram.org/tdlib
-- Fly.io: https://fly.io/docs
+- Heroku: https://devcenter.heroku.com/
 
 ## Troubleshooting
 
-**"Command not found: flyctl"**
-- Restart your terminal/PowerShell after installing flyctl
+**Build failed:**
+- Check the Heroku build logs
+- Verify your `TELEGRAM_API_ID` and `TELEGRAM_API_HASH` are correct
+- Make sure environment variables are set in Heroku settings
 
-**Deployment fails:**
-```bash
-# Check logs
-flyctl logs
+**App crashes:**
+- Go to Heroku dashboard → Your app → **Logs**
+- Look for error messages
+- Try restarting the dyno: **More** → **Restart all dynos**
 
-# Check status
-flyctl status
-```
+**Can't find the URL:**
+- Go to Heroku dashboard
+- Click on your app
+- Look for the **Domains** section or **Visit app** button
+- The URL is shown there
 
-**Verify environment variables are set:**
-```bash
-flyctl secrets list
-```
-
-**App URL not accessible:**
-- Wait a few minutes for deployment to fully complete
-- Check: `flyctl status`
-
-**Still having issues?**
-Check logs with:
-```bash
-flyctl logs --follow
-```
-
-## Managing Your App
-
-**View app status:**
-```bash
-flyctl status
-```
-
-**View logs:**
-```bash
-flyctl logs
-```
-
-**Update secrets:**
-```bash
-flyctl secrets set TELEGRAM_API_ID=new_value
-flyctl secrets set TELEGRAM_API_HASH=new_value
-```
-
-**Restart app:**
-```bash
-flyctl restart
-```
-
-**Scale instances (advanced):**
-```bash
-flyctl scale count 2
-```
+**Performance is slow:**
+- Free Heroku tier has limitations
+- Consider upgrading to Eco or Standard dyno
+- Or use a VPS like DigitalOcean for better performance
 
 ## Cost
 
-- **FREE tier:** 3 shared-cpu-1x 256MB VMs, 3GB persistent storage
-- This is enough to run the Telegram Bot API server
-- If you need more resources, paid plans start at $1.94/month
+- **Free tier:** Limited, but works for light usage
+- **Eco dyno:** $5/month (recommended)
+- **Standard dyno:** $7/month
 
 ## License
 
