@@ -1,0 +1,23 @@
+app = "telegram-bot-api"
+primary_region = "ord"
+
+[env]
+  TELEGRAM_API_ID = ""
+  TELEGRAM_API_HASH = ""
+
+[build]
+  builder = "docker"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8081
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
